@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col-3 sidebar p-3 text-center">
+            <h1>Species</h1>
+            <ul>
+                <li *ngFor="let spc of species" (click)="changeSpecies(spc)" [class.active]="character.species == species" class="mb-3 py-2">
+                    {{spc}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-6 text-center text-white p-3">
+            <h2>Species</h2>
+            <p>{{character.species}}</p>
+            <h2>Profession</h2>
+            <p>{{character.profession}}</p>
+            <h2>Name</h2>
+            <input type="text" placeholder="Choose a name" class="mb-5 px-2" [(ngModel)]="character.name" (input)="changeName()"/>
+            <button class="btn continue-button px-5 py-2 mx-auto" [class.disabled]="!characterComplete" (click)="createCharacter()">Create your character!</button>
+        </div>
+        <div class="col-3 sidebar p-3 text-center">
+            <h1>Professions</h1>
+            <ul>
+                <li *ngFor="let prof of professions" (click)="changeProfession(prof)" [class.active]="character.profession == profession" class="mb-3 py-2">
+                    {{prof}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

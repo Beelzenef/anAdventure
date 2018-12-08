@@ -1,1 +1,40 @@
+.container-fluid {
+    height: 100vh;   
+    background: rgba(0, 0, 0, 0.5);
+}
 
+.sidebar {
+    background-color: whitesmoke;
+}
+
+.sidebar ul {
+    list-style: none;
+    text-indent: 0;
+    padding: 0;
+} 
+
+.sidebar li {
+    cursor: pointer;
+    display: block;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+}
+
+.sidebar li.active {
+    background: chocolate;
+}
+
+.continue-button {
+    display: block;
+    cursor: pointer;
+    color: white;
+    background: red;
+    border: none;
+    border-radius: 7px;
+}
+
+.continue-button.disabled {
+    background: black;
+    cursor: auto;
+}
