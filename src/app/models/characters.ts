@@ -59,12 +59,13 @@ export class BaseCharacter {
     };
     skills: {
         attack: number,
-        sneak: number
+        sneak: number,
+        knowledge: number
     };
     equippedWeapon: Weapon;
     equippedArmor: Armor;
 
-    constructor(name: string, health: number, skills = {attack: 0, sneak: 0}) {
+    constructor(name: string, health: number, skills = {attack: 0, sneak: 0, knowledge: 0}) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = health;
@@ -153,3 +154,99 @@ export class Hero extends BaseCharacter {
         this.turnsUntilSpecialAvailableAgain = 0;
     }
 }
+
+export class Soldier extends Hero {
+    constructor(name, health, skills, profession, species, weapon, armor, level) {
+        super(name, health, skills, profession, species, weapon, armor, level);
+        this.characterRole = ProfessionOptions.soldier;
+        this.skills.attack += 3;
+        this.skills.sneak -= 2;
+        this.spriteUrl = "../assets/medievalUnit_20.png";
+    }
+
+    levelUp() : void {
+        this.maxHealth = Math.floor(Math.random() * 10) + 1;
+        this.currentHealth = this.maxHealth;
+        super.levelUp();
+    }
+}
+
+export class Pilot extends Hero {
+    constructor(name, health, skills, profession, species, weapon, armor, level) {
+        super(name, health, skills, profession, species, weapon, armor, level);
+        this.characterRole = ProfessionOptions.pilot;
+        this.skills.attack--;
+        this.skills.sneak += 3;
+        this.spriteUrl = "../assets/medievalUnit_04.png";
+    }
+
+    levelUp() : void {
+        this.maxHealth = Math.floor(Math.random() * 7) + 1;
+        this.currentHealth = this.maxHealth;
+        super.levelUp();
+    }
+}
+
+export class Guard extends Hero {
+    constructor(name, health, skills, profession, species, weapon, armor, level) {
+        super(name, health, skills, profession, species, weapon, armor, level);
+        this.characterRole = ProfessionOptions.guard;
+        this.skills.attack += 2;
+        this.skills.sneak += 2;
+        this.spriteUrl = "../assets/medievalUnit_15.png";
+    }
+
+    levelUp() : void {
+        this.maxHealth = Math.floor(Math.random() * 9) + 1;
+        this.currentHealth = this.maxHealth;
+        super.levelUp();
+    }
+}
+
+export class Erudite extends Hero {
+    constructor(name, health, skills, profession, species, weapon, armor, level) {
+        super(name, health, skills, profession, species, weapon, armor, level);
+        this.characterRole = ProfessionOptions.erudite;
+        this.skills.knowledge += 3;
+        this.skills.attack -= 2;
+        this.spriteUrl = "../assets/medievalUnit_01.png";
+    }
+
+    levelUp() : void {
+        this.maxHealth = Math.floor(Math.random() * 4) + 1;
+        this.currentHealth = this.maxHealth;
+        super.levelUp();
+    }
+}
+
+export class Newshound extends Hero {
+    constructor(name, health, skills, profession, species, weapon, armor, level) {
+        super(name, health, skills, profession, species, weapon, armor, level);
+        this.characterRole = ProfessionOptions.newshound;
+        this.skills.knowledge += 2;
+        this.skills.sneak++;
+        this.spriteUrl = "../assets/medievalUnit_07.png";
+    }
+
+    levelUp() : void {
+        this.maxHealth = Math.floor(Math.random() * 5) + 1;
+        this.currentHealth = this.maxHealth;
+        super.levelUp();
+    }
+}
+
+export const CheckSpecies = (hero : Hero) => {
+    switch (hero.species) {
+        case SpeciesOptions.human:
+            hero.skills.knowledge++;
+            break;
+        case SpeciesOptions.lyxnel:
+            hero.skills.sneak++;
+            break;
+        case SpeciesOptions.sheller:
+            hero.skills.attack++;
+            break;
+        default:
+            break;
+    }
+};
