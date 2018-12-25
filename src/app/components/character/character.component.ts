@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CharacterOptions } from '../../models/character-options';
+import { GameControllerService } from 'src/app/services/game-controller.service';
 
 @Component({
     selector: "character-component",
@@ -7,23 +8,26 @@ import { CharacterOptions } from '../../models/character-options';
     styleUrls: ["./character.component.css"]
 })
 export class CharacterComponent {
+
+    constructor(private gameController: GameControllerService) { }
+
     character = {
         species: '--Choose--',
         profession: '--Choose--',
         name: undefined
     }
 
-    characterComplete : boolean = false;
+    characterComplete: boolean = false;
 
     species = CharacterOptions.species;
     professions = CharacterOptions.professions;
 
-    changeProfession(prof : string) {
+    changeProfession(prof: string) {
         this.character.profession = prof;
         this.checkCompleted();
     }
 
-    changeSpecies(spc : string) {
+    changeSpecies(spc: string) {
         this.character.species = spc;
         this.checkCompleted();
     }
@@ -33,7 +37,7 @@ export class CharacterComponent {
     }
 
     checkCompleted() {
-        this.characterComplete = 
+        this.characterComplete =
             this.character.profession != "--Choose--" &&
             this.character.species != "--Choose--" &&
             this.character.name;
@@ -43,5 +47,6 @@ export class CharacterComponent {
         if (!this.characterComplete) return;
 
         console.log(this.character);
+        this.gameController.setMainCharacter(this.character);
     }
 }

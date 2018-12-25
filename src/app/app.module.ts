@@ -10,15 +10,16 @@ import { CharacterComponent } from './components/character/character.component';
 import { FightComponent } from './components/fight/fight.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { StoryComponent } from './components/story/story.component';
+import { GameControllerService } from './services/game-controller.service';
 
-const routes : Routes = [
-    { path: "", component: StartComponent },
-    { path: "story", component: StoryComponent },
-    { path: "character", component: CharacterComponent },
-    { path: "fight", component: FightComponent},
-    { path: "inventory", component: InventoryComponent },
-    { path: "story", component: StoryComponent },
-    { path: "**", redirectTo: "" }
+const routes: Routes = [
+  { path: "", component: StartComponent },
+  { path: "story", component: StoryComponent },
+  { path: "character", component: CharacterComponent },
+  { path: "fight", component: FightComponent },
+  { path: "inventory", component: InventoryComponent },
+  { path: "story", component: StoryComponent },
+  { path: "**", redirectTo: "" }
 ];
 
 @NgModule({
@@ -35,7 +36,7 @@ const routes : Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [GameControllerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

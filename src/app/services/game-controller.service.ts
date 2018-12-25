@@ -20,7 +20,7 @@ export class GameControllerService {
     availableHeroes: Hero[] = [];
     enemyParty: Enemy[] = this.currentChapter.enemyParty;
 
-    setMainCharacter(character: { name: string, profession: ProfessionOptions, species: SpeciesOptions }): void {
+    setMainCharacter(character): void {
         switch (character.profession) {
             case ProfessionOptions.erudite:
                 this.mainCharacter = new Erudite(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
@@ -97,7 +97,7 @@ export class GameControllerService {
         });
     }
 
-    gameOver() : void {
+    gameOver(): void {
         this.mainCharacter = undefined;
         this.currentChapter = Chapter1;
         this.heroParty = [];
