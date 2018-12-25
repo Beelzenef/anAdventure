@@ -50,17 +50,59 @@ export class GameControllerService {
         this.currentChapter.ifSucceed.forEach(reward => {
             switch (reward) {
                 case SuccessOptions.addHeroToParty:
+                    let newHero: Hero = this.currentChapter.rewards.newHero;
+                    if (this.heroParty.length < 3) {
+                        messages.push(`A new hero joined your party: ${newHero.name}, 
+                        a level ${newHero.level} ${newHero.profession}!`)
+                        this.heroParty.push(newHero);
+                    }
+                    else {
+                        messages.push(`A new hero is available for your party: ${newHero.name}, 
+                        a level ${newHero.level} ${newHero.profession}!`)
+                        this.availableHeroes.push(newHero);
+                    }
+                    break;
                 case SuccessOptions.rewardEquipment:
+                    messages.push("You receive the following equipment: ")
+                    this.currentChapter.rewards.equipment.forEach(item => {
+                        if (item instanceof Armor) {
+                            messages.push(`${item.name} -- Attack barrier bonus: ${item.attackBarrierBonus}`);
+                        }
+                        else {
+                            messages.push(`${item.name} -- Min damage: ${item.minDamage}, max damage: ${item.maxDamage}`);
+                        }
+                        this.partyInventory.push(item);
+                    })
+                    break;
                 case SuccessOptions.rewardExperience:
                     messages.push(`Each member of your party received ${this.currentChapter.rewards.experience}`);
                     this.heroParty.forEach(hero => {
                         hero.experience += this.currentChapter.rewards.experience;
                         if (hero.experience >= ExperienceToLevel[hero.level]) {
-                            messages.push(`${hero.name} leveled up!`)
+                            messages.push(`${hero.name} leveled up! Upgrade the character in the inventory screen`);
+                            hero.levelUp();
                         }
                     });
+                    break;
             }
         })
         return messages;
+    }
+
+    nextChapter(): void {
+        this.heroParty.forEach(hero => {
+            hero.rest();
+            this.currentChapter = this.currentChapter.nextChapter;
+            this.enemyParty = this.currentChapter.enemyParty;
+        });
+    }
+
+    gameOver() : void {
+        this.mainCharacter = undefined;
+        this.currentChapter = Chapter1;
+        this.heroParty = [];
+        this.partyInventory = [];
+        this.availableHeroes = [];
+        this.enemyParty = this.currentChapter.enemyParty;
     }
 }
