@@ -24,19 +24,19 @@ export class GameControllerService {
         switch (character.profession) {
             case ProfessionOptions.erudite:
                 this.mainCharacter = new Erudite(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
-                    ProfessionOptions.erudite, SpeciesOptions.human, null, null, 1);
+                    ProfessionOptions.erudite, character.species, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
             case ProfessionOptions.guard:
                 this.mainCharacter = new Guard(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
-                    ProfessionOptions.guard, SpeciesOptions.human, null, null, 1);
+                    ProfessionOptions.guard, character.species, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
             case ProfessionOptions.newshound:
                 this.mainCharacter = new Newshound(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
-                    ProfessionOptions.newshound, SpeciesOptions.human, null, null, 1);
+                    ProfessionOptions.newshound, character.species, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
             case ProfessionOptions.pilot:
                 this.mainCharacter = new Pilot(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
-                    ProfessionOptions.pilot, SpeciesOptions.human, null, null, 1);
+                    ProfessionOptions.pilot, character.species, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
             case ProfessionOptions.soldier:
                 this.mainCharacter = new Soldier(character.name, 10, { attack: 0, sneak: 0, knowledge: 0 },
-                    ProfessionOptions.soldier, SpeciesOptions.human, null, null, 1);
+                    ProfessionOptions.soldier, character.species, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
         }
 
         CheckSpecies(this.mainCharacter);
