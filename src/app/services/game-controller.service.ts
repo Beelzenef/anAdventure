@@ -15,7 +15,7 @@ export class GameControllerService {
 
     actionDelay: number = 1500;
 
-    heroParty: Hero[] = [];
+    heroParty: Hero[] = this.getInitialParty();
     partyInventory: (Weapon | Armor)[] = [];
     availableHeroes: Hero[] = [];
     enemyParty: Enemy[] = this.currentChapter.enemyParty;
@@ -104,5 +104,16 @@ export class GameControllerService {
         this.partyInventory = [];
         this.availableHeroes = [];
         this.enemyParty = this.currentChapter.enemyParty;
+    }
+
+    getInitialParty(): Hero[] {
+        var oneComp = new Soldier("Companion1", 10, { attack: 0, sneak: 0, knowledge: 0 },
+            ProfessionOptions.soldier, SpeciesOptions.human, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
+        var secondComp = this.mainCharacter = new Pilot("Companion2", 10, { attack: 0, sneak: 0, knowledge: 0 },
+            ProfessionOptions.pilot, SpeciesOptions.lyxnel, new Weapon("W1", 1, 5), new Armor("A1", 1), 1);
+
+        var initialParty: Hero[] = new Array(oneComp, secondComp);
+
+        return initialParty;
     }
 }

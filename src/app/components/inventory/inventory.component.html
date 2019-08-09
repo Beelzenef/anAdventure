@@ -9,13 +9,13 @@
                     <div class="close-button" (click)="closeInventory()">
                         <i class="fa fa-times"></i>
                     </div>
-                    <div *ngFor="let hero of heroParty" class="col p-3 hero-tab" [class.selected]="selectedHero === hero"
+                    <div *ngFor="let hero of heros" class="col p-3 hero-tab" [class.selected]="selectedHero === hero"
                         (click)="setSelectedHero(hero)">
                         <h2 class="text-center">
                             {{hero.name}}
                         </h2>
-                    </div>
-                    <div class="col-2 add-hero" (click)="showAvailableHeroes()" *ngIf="hero.heroParty.lenght < 3 && availableHeroes.length && !isFighting">
+                    </div> 
+                    <div class="col-2 add-hero" (click)="showAvailableHeroes()" *ngIf="heros.lenght < 3 && availableHeroes.length && !isFighting">
                         <i class="fa fa-plus"></i>
                     </div>
                 </div>

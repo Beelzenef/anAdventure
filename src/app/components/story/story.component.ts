@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GameControllerService } from 'src/app/services/game-controller.service';
 import { Router } from '@angular/router';
-import { Chapter, CharacterAction } from 'src/app/models/chapter';
+import { CharacterAction } from 'src/app/models/chapter';
 import { Hero, Enemy } from 'src/app/models/characters';
 
 @Component({

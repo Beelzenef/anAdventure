@@ -7,28 +7,29 @@ import { CharacterSkills, Hero, Armor, Weapon, ExperienceToLevel } from 'src/app
     templateUrl: "./inventory.component.html",
     styleUrls: ["./inventory.component.css"]
 })
+
 export class InventoryComponent {
     constructor(private gameController : GameControllerService) {}
 
     inventoryIsOpen: boolean = false;
 
     _characterSkills: typeof CharacterSkills = CharacterSkills;
-    heroParty: Hero[] = this.gameController.heroParty;
+    heros: Hero[] = this.gameController.heroParty;
     mainCharacter: Hero = this.gameController.mainCharacter;
     availableHeroes: Hero[] = this.gameController.availableHeroes;
     inventory: (Weapon | Armor)[] = this.gameController.partyInventory;
     _experienceToLevel: typeof ExperienceToLevel = ExperienceToLevel;
 
-    selectedHero: Hero = this.heroParty[0];
+    selectedHero: Hero = this.heros[0];
     showAvailableHeroesScreen: boolean = false;
     isFighting: boolean = this.gameController.isFighting;
 
     openInventory() {
         this.inventoryIsOpen = true;
-        this.heroParty = this.gameController.heroParty;
+        this.heros = this.gameController.heroParty;
         this.availableHeroes = this.gameController.availableHeroes;
         this.inventory = this.gameController.partyInventory;
-        this.selectedHero = this.heroParty[0];
+        this.selectedHero = this.heros[0];
         this.showAvailableHeroesScreen = false;
         this.isFighting = this.gameController.isFighting;
     }
@@ -62,7 +63,7 @@ export class InventoryComponent {
 
     removeCharacterFromParty() {
         this.availableHeroes.push(this.selectedHero);
-        this.heroParty.splice(this.heroParty.indexOf(this.selectedHero), 1);
+        this.heros.splice(this.heros.indexOf(this.selectedHero), 1);
         this.selectedHero = this.mainCharacter;
     }
 
@@ -72,7 +73,7 @@ export class InventoryComponent {
     }
 
     addHeroToParty(hero: Hero) {
-        this.heroParty.push(hero);
+        this.heros.push(hero);
         this.availableHeroes.splice(this.availableHeroes.indexOf(hero), 1);
         this.setSelectedHero(hero);
     }

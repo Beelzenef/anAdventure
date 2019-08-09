@@ -2,7 +2,6 @@ import { Component } from '@angular/core'
 import { GameControllerService } from 'src/app/services/game-controller.service';
 import { Router } from '@angular/router';
 import { Hero, Enemy, FightOptions, BaseCharacter, Pilot, Newshound, Erudite, Guard, Soldier } from 'src/app/models/characters';
-import { Chapter } from 'src/app/models/chapter';
 
 enum Teams {
     heroes,
